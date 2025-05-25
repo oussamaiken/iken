@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professzionális Székhelyszolgáltatás Budapesten | meghatalmazott.hu</title>
+  <meta name="description" content="Professzionális székhelyszolgáltatás Budapesten. Teljes körű irodakezelés, levelezési cím, cégalapítás, könyvelés vállalkozásoknak.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #0a0a1a;
+      --text-light: #e6e6e6;
+      --blue-accent: #1e90ff;
+      --blue-dark: #1c3d7a;
+      --blue-light: #87cefa;
+      --card-bg: rgba(20, 20, 40, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --box-shadow: 0 8px 32px rgba(30, 144, 255, 0.2);
+      --text-dark: #333;
+
+      --bg-color: var(--bg-dark);
+      --text-color: var(--text-light);
+      --card-bg-color: var(--card-bg);
+      --glass-bg-color: var(--glass-bg);
+      --box-shadow-color: var(--box-shadow);
+    }
+
+    [data-theme="white"] {
+      --bg-color: #f5f7fa;
+      --text-color: var(--text-dark);
+      --card-bg-color: rgba(255, 255, 255, 0.9);
+      --glass-bg-color: rgba(255, 255, 255, 0.3);
+      --box-shadow-color: 0 8px 32px rgba(30, 144, 255, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      color: var(--text-color);
+      background: var(--bg-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #language-selector {
+  background: var(--card-bg-color);
+  border: 1px solid var(--blue-accent);
+  color: var(--text-color);
+  padding: 8px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#language-selector:hover {
+  background: var(--blue-accent);
+  color: var(--bg-dark);
+}
+
+[data-theme="white"] #language-selector:hover {
+  color: #fff;
+}
+
+    nav.navbar {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 5%;
+    }
+
+    [data-theme="white"] nav.navbar {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    nav.navbar.scrolled {
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: var(--box-shadow-color);
+    }
+
+    [data-theme="white"] nav.navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      text-decoration: none;
+    }
+
+    .navbar-list {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .navbar-item {
+      position: relative;
+    }
+
+    .navbar-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px;
+      display: block;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .navbar-link:hover {
+      color: var(--blue-accent);
+    }
+
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 10px;
+      width: 0;
+      height: 2px;
+      background: var(--blue-accent);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-link:hover::after {
+      width: calc(100% - 20px);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      display: none;
+      background: var(--card-bg-color);
+      border-radius: 10px;
+      padding: 10px 0;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      box-shadow: var(--box-shadow-color);
+      z-index: 1001;
+    }
+
+    .navbar-item:hover .dropdown-menu {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+
+    .dropdown-link {
+      color: var(--text-color);
+      text-decoration: none;
+      display: block;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-link:hover {
+      background: rgba(30, 144, 255, 0.1);
+      color: var(--blue-accent);
+      transform: translateX(5px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--blue-accent);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--blue-accent);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--blue-light);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(10, 10, 26, 0.9), rgba(30, 144, 255, 0.1));
+    }
+
+    [data-theme="white"] header {
+      background: linear-gradient(180deg, rgba(245, 247, 250, 0.9), rgba(30, 144, 255, 0.2));
+    }
+
+    .header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3') center/cover no-repeat;
+      z-index: -1;
+      transform: scale(1.1);
+    }
+
+    .header-content {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px;
+      background: var(--glass-bg-color);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--box-shadow-color);
+    }
+
+    .header-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--blue-accent);
+    }
+
+    .header-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .price-highlight {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      margin: 20px 0;
+      padding: 15px;
+      background: var(--glass-bg-color);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+      display: inline-block;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      padding: 4rem 0;
+      background: var(--bg-color);
+    }
+
+    .hero-text {
+      background: var(--card-bg-color);
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: var(--box-shadow-color);
+      transition: all 0.3s ease;
+    }
+
+    .hero-text:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(30, 144, 255, 0.2);
+    }
+
+    .hero-text h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: var(--blue-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text p {
+      opacity: 0.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .feature {
+      background: var(--card-bg-color);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--box-shadow-color);
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(30, 144, 255, 0.2);
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: var(--blue-accent);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover i {
+      transform: rotate(360deg);
+    }
+
+    .feature h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--blue-accent);
+    }
+
+    .card {
+      background: var(--card-bg-color);
+      border-radius: 10px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: var(--box-shadow-color);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(30, 144, 255, 0.2);
+    }
+
+    .card h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: var(--blue-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card ul li {
+      padding: 0.8rem 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .card ul li::before {
+      content: '✓';
+      color: var(--blue-light);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .contact-grid div {
+      background: var(--glass-bg-color);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .contact-grid h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: var(--blue-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-accent {
+      background: var(--blue-accent);
+      color: var(--bg-dark);
+      border: 1px solid var(--blue-accent);
+    }
+
+    [data-theme="white"] .btn-accent {
+      color: #fff;
+    }
+
+    .btn-accent::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-accent:hover::after {
+      left: 100%;
+    }
+
+    .btn-accent:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: var(--card-bg-color);
+      padding: 60px 5% 20px;
+      color: var(--text-color);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--blue-accent);
+    }
+
+    .footer-section p {
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--blue-accent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--blue-accent);
+      padding-left: 5px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(30, 144, 255, 0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 992px) {
+      .navbar-list {
+        display: none;
+      }
+
+      .navbar-list.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--card-bg-color);
+        padding: 20px;
+        box-shadow: var(--box-shadow-color);
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .dropdown-menu {
+        position: static;
+        background: rgba(30, 144, 255, 0.05);
+        box-shadow: none;
+      }
+
+      .navbar-item:hover .dropdown-menu {
+        display: none;
+      }
+
+      .navbar-item.active .dropdown-menu {
+        display: block;
+      }
+
+      .header-content {
+        padding: 30px;
+        max-width: 90%;
+      }
+
+      .header-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .price-highlight {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-text {
+        padding: 1.5rem;
+      }
+
+      .hero-text h2 {
+        font-size: 1.8rem;
+      }
+
+      .card h2 {
+        font-size: 1.8rem;
+      }
+
+      .price-highlight {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .price-highlight {
+        font-size: 1.5rem;
+      }
+    }
+
+    .language-flags .flag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-flags .flag-list li {
+  display: inline-block;
+}
+
+.language-flags .flag-list img {
+  width: 24px;
+  height: 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.language-flags .flag-list img:hover {
+  transform: scale(1.2);
+  border-color: var(--blue-accent);
+}
+
+.language-flags .flag-list img.active {
+  border-color: var(--blue-accent);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="white"] .language-flags .flag-list img:hover,
+[data-theme="white"] .language-flags .flag-list img.active {
+  border-color: #0055a4;
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+<!-- After <body> tag -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-brand">meghatalmazott.hu</a>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="navbar-list">
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Székhelyszolgáltatás</a>
+          <ul class="dropdown-menu">
+     
+            <li><a href="Székhelyszolgáltatás/mi-a-szekhely.html" class="dropdown-link">Mi a székhely</a></li>
+            <li><a href="Székhelyszolgáltatás/Székhely_szolgálat.html" class="dropdown-link">Székhely szolgálat</a></li>
+            <li><a href="Székhelyszolgáltatás/Székhelyszolgáltatás_Budapest.html" class="dropdown-link">Székhelyszolgáltatás Budapest</a></li>
+            <li><a href="Székhelyszolgáltatás/Székhelyszolgáltatás_egyéni_vállalkozóknak.html" class="dropdown-link">Székhelyszolgáltatás egyéni vállalkozóknak</a></li>
+            <li><a href="Székhelyszolgáltatás/Székhelyszolgáltatás_szerződés.html" class="dropdown-link">Székhelyszolgáltatás szerződés</a></li>
+            <li><a href="Székhelyszolgáltatás/Székhely-szolgáltatás.html" class="dropdown-link">Székhely-szolgáltatás</a></li>
+          </ul>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Szolgáltatások</a>
+          <ul class="dropdown-menu">
+            <li><a href="Szolgáltatások/Cégalapítás_Budapest.html" class="dropdown-link">Cégalapítás Budapest</a></li>
+            <li><a href="Szolgáltatások/Levelezési_cím_szolgáltatás.html" class="dropdown-link">Levelezési cím szolgáltatás</a></li>
+            <li><a href="Szolgáltatások/Adókártya_igénylés.html" class="dropdown-link">Adókártya igénylés</a></li>
+            <li><a href="Szolgáltatások/Kézbesítési_megbízott.html" class="dropdown-link">Kézbesítési megbízott</a></li>
+          </ul>
+        </li>
+        <li class="navbar-item">
+          <a href="#" class="navbar-link">Cégalapítás</a>
+          <ul class="dropdown-menu">
+            <li><a href="Cégalapítás/Cégalapítás.html" class="dropdown-link">Cégalapítás</a></li>
+            <li><a href="Cégalapítás/Cégnév_választás.html" class="dropdown-link">Cégnév választás</a></li>
+            <li><a href="Cégalapítás/Hogyan_kezdjünk_vállakozásba.html" class="dropdown-link">Hogyan kezdjünk vállalkozást</a></li>
+          </ul>
+        </li>
+        <li class="navbar-item">
+          <a href="https://www.facebook.com/share/1C438xdPfZ/?mibextid=wwXIfr" class="navbar-link">Kapcsolat</a>
+        </li>
+
+
+
+<li class="navbar-item language-flags">
+  <ul class="flag-list">
+    <li><img src="https://flagcdn.com/w20/hu.png" alt="Hungarian" data-lang="hu" title="Magyar"></li>
+    <li><img src="https://flagcdn.com/w20/gb.png" alt="English" data-lang="en" title="English"></li>
+    <li><img src="https://flagcdn.com/w20/ua.png" alt="Ukrainian" data-lang="ua" title="Українська"></li>
+    <li><img src="https://flagcdn.com/w20/ru.png" alt="Russian" data-lang="ru" title="Русский"></li>
+    <li><img src="https://flagcdn.com/w20/it.png" alt="Italian" data-lang="it" title="Italiano"></li>
+    <li><img src="https://flagcdn.com/w20/ro.png" alt="Romanian" data-lang="ro" title="Română"></li>
+    <li><img src="https://flagcdn.com/w20/de.png" alt="German" data-lang="de" title="Deutsch"></li>
+    <li><img src="https://flagcdn.com/w20/rs.png" alt="Serbian" data-lang="sr" title="Srpski"></li>
+    <li><img src="https://flagcdn.com/w20/ae.png" alt="Arabic" data-lang="ar" title="العربية"></li>
+  </ul>
+</li>
+
+
+
+
+        <li class="navbar-item">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header>
+    <div class="header-bg"></div>
+    <div class="container">
+      <div class="header-content">
+        <h1 class="typing-text">Professzionális Székhelyszolgáltatás Budapesten</h1>
+        <div class="price-highlight" data-tilt>CSAK 164 Ft / nap</div>
+        <p>Teljes körű cégszolgáltatások - gyorsan, megbízhatóan, kedvező áron</p>
+        <a href="#contact" class="btn btn-accent">Azonnali kapcsolat</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Miért válasszon minket?</h2>
+        <p>A székhely a cég központi ügyintézési helye, ahol hivatalos levelek érkeznek és iratokat tárolunk. Szolgáltatásunk három budapesti irodában, saját tulajdonú ingatlanokban, teljes körű adminisztrációs támogatással áll rendelkezésére.</p>
+        <a href="#contact" class="btn btn-accent">Kapcsolatfelvétel</a>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <div class="grid">
+      <div class="feature" data-tilt>
+        <i class="fas fa-envelope-open-text"></i>
+        <h3>Levelezés kezelése</h3>
+        <p>Leveleit díjmentesen szkenneljük és emailben továbbítjuk, így bárhonnan hozzáférhet dokumentumaihoz.</p>
+      </div>
+      <div class="feature" data-tilt>
+        <i class="fas fa-building"></i>
+        <h3>Cégalapítás</h3>
+        <p>Kkv-k és nagyvállalatok számára, kedvező áron, teljes jogi támogatással.</p>
+      </div>
+      <div class="feature" data-tilt>
+        <i class="fas fa-calculator"></i>
+        <h3>Könyvelés</h3>
+        <p>Tapasztalt szakembereink biztosítják cége teljes körű könyvelését.</p>
+      </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section class="card">
+      <h2>Székhelyszolgáltatás Áraink</h2>
+      <ul>
+        <li><strong>Csak 164 Ft / nap</strong></li>
+        <li><strong>1 év + 2 hónap ingyen</strong>: bruttó 70.000 Ft / év (5.000 Ft / hó)</li>
+        <li>Szerződés megfelel a 7/2017. (VI.1.) IM rendeletnek</li>
+        <li>Ajándék: 2 extra hónap + bélyegzőház</li>
+      </ul>
+      <p>Szolgáltatásunkat saját tulajdonú ingatlanokban nyújtjuk, három modern budapesti irodában.</p>
+    </section>
+
+    <!-- Offices Section -->
+    <section class="card">
+      <h2>Irodáink</h2>
+      <ul>
+        <li><strong>THE LORD IS CARING KFT</strong> - 1083 Budapest, Baross utca 103. fszt.</li>
+        <li><strong>1906 AZUSA STREET KFT</strong> - 1083 Budapest, Práter utca 59.</li>
+        <li><strong>FIVE TAILORS COMPANY KFT</strong> - 1077 Budapest, Izabella utca 3/A.</li>
+      </ul>
+      <p>Mindhárom irodánk könnyen megközelíthető, modern irodaházakban, tömegközlekedési csomópontok közelében.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="card">
+      <h2>Szolgáltatásaink</h2>
+      <ul>
+        <li><strong>Levelezési cím</strong>: Professzionális megjelenés cége számára</li>
+        <li><strong>Adókártya igénylés</strong>: 1 nap alatt, 10.000 Ft</li>
+        <li><strong>Könyvelés</strong>: Tapasztalt szakemberekkel</li>
+        <li><strong>Cégalapítás</strong>: Gyorsan, kedvező áron</li>
+        <li><strong>Telefonos ügyfélszolgálat</strong>: Megbízható támogatás</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="card">
+      <h2>Kapcsolat</h2>
+      <div class="contact-grid">
+        <div>
+          <h3>Irodavezető</h3>
+          <p>Szabó Guszti</p>
+        </div>
+        <div>
+          <h3>Email</h3>
+          <p><a href="mailto:info@meghatalmazott.hu">info@meghatalmazott.hu</a></p>
+        </div>
+        <div>
+          <h3>Telefon</h3>
+          <p><a href="tel:+36204635994">+36 20 463 5994</a></p>
+        </div>
+      </div>
+      <p>Kérdése van? Vegye fel velünk a kapcsolatot!</p>
+      <a href="mailto:info@meghatalmazott.hu" class="btn btn-accent">Email küldése</a>
+    </section>
+
+    <!-- Company Details Section -->
+    <section class="card">
+      <h2>Elérhetőségeink és Adatok</h2>
+      <ul>
+        <li><strong>The Lord is Caring Kft</strong><br>1083 Budapest, Baross utca 103. fszt.<br>Adószám: 26698087-1-42<br>Számlaszám: 10103104-29753800-01005008</li>
+        <li><strong>1906 Azusa Street Kft</strong><br>1083 Budapest, Práter utca 59.<br>Adószám: 26698197-1-42<br>Számlaszám: 10103104-29753100-01005007</li>
+        <li><strong>Five Tailors Company Kft</strong><br>1077 Budapest, Izabella utca 3/A.<br>Adószám: 26698166-1-42<br>Számlaszám: 10103104-29757300-01005007</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">meghatalmazott.hu</div>
+        <p>Professzionális székhelyszolgáltatás Budapesten három modern irodában.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Gyorslinkek</h3>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Szolgáltatások</a></li>
+          <li><a href="#" class="footer-link">Árak</a></li>
+          <li><a href="#contact" class="footer-link">Kapcsolat</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Elérhetőség</h3>
+        <p>1083 Budapest, Baross utca 103.</p>
+        <p><a href="mailto:info@meghatalmazott.hu">info@meghatalmazott.hu</a></p>
+        <p><a href="tel:+36204635994">+36 20 463 5994</a></p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 meghatalmazott.hu | Székhelyszolgáltatás, cégalapítás, könyvelés | Minden jog fenntartva</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const themeIcon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    body.setAttribute('data-theme', savedTheme);
+    themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'white' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      localStorage.setItem('theme', newTheme);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navbarList = document.querySelector('.navbar-list');
+    mobileMenuBtn.addEventListener('click', () => {
+      navbarList.classList.toggle('active');
+    });
+
+    // Dropdown menu toggle
+    const navbarItems = document.querySelectorAll('.navbar-item');
+    navbarItems.forEach(item => {
+      const link = item.querySelector('.navbar-link');
+      const dropdown = item.querySelector('.dropdown-menu');
+      if (dropdown) {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 992) {
+            e.preventDefault();
+            item.classList.toggle('active');
+            navbarItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                otherItem.classList.remove('active');
+              }
+            });
+          }
+        });
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.navbar-item') && window.innerWidth <= 992) {
+        navbarItems.forEach(item => {
+          item.classList.remove('active');
+        });
+      }
+    });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Header typing effect
+    const typingText = document.querySelector('.typing-text');
+    const text = typingText.textContent;
+    typingText.textContent = '';
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        typingText.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 50);
+      }
+    }
+    setTimeout(type, 500);
+
+    gsap.from('.header-content', {
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: 'power3.out'
+    });
+
+    gsap.to('.header-bg', {
+      y: 50,
+      scrollTrigger: {
+        trigger: 'header',
+        scrub: true
+      }
+    });
+
+    VanillaTilt.init(document.querySelector('.price-highlight'), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.3
+    });
+
+    gsap.from('.hero-text', {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top 80%'
+      }
+    });
+
+    gsap.utils.toArray('.feature').forEach((feature, index) => {
+      gsap.from(feature, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: index * 0.2,
+        scrollTrigger: {
+          trigger: feature,
+          start: 'top 80%'
+        }
+      });
+    });
+
+    VanillaTilt.init(document.querySelectorAll('.feature'), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.3
+    });
+
+    gsap.utils.toArray('.card').forEach((card, index) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: index * 0.2,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%'
+        }
+      });
+    });
+
+    gsap.from('.contact-grid > *', {
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: '#contact',
+        start: 'top 80%'
+      }
+    });
+
+
+const translations = {
+  hu: { // Hungarian (original)
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Szolgáltatások",
+      registered_office: "Székhelyszolgáltatás",
+      company_formation: "Cégalapítás",
+      contact: "Kapcsolat",
+      dropdown_registered_office: [
+        "Mi a székhely",
+        "Székhely szolgálat",
+        "Székhelyszolgáltatás Budapest",
+        "Székhelyszolgáltatás egyéni vállalkozóknak"
+      ],
+      dropdown_services: [
+        "Cégalapítás Budapest",
+        "Levelezési cím szolgáltatás",
+        "Adókártya igénylés",
+        "Könyvelés"
+      ],
+      dropdown_company_formation: [
+        "Cégalapítás",
+        "Cégnév választás",
+        "Hogyan kezdjünk vállalkozást"
+      ]
+    },
+    header: {
+      title: "Professzionális Székhelyszolgáltatás Budapesten",
+      price: "CSAK 164 Ft / nap",
+      subtitle: "Teljes körű cégszolgáltatások - gyorsan, megbízhatóan, kedvező áron",
+      cta: "Azonnali kapcsolat"
+    },
+    hero: {
+      title: "Miért válasszon minket?",
+      text: "A székhely a cég központi ügyintézési helye, ahol hivatalos levelek érkeznek és iratokat tárolunk. Szolgáltatásunk három budapesti irodában, saját tulajdonú ingatlanokban, teljes körű adminisztrációs támogatással áll rendelkezésére.",
+      cta: "Kapcsolatfelvétel"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Levelezés kezelése",
+        text: "Leveleit díjmentesen szkenneljük és emailben továbbítjuk, így bárhonnan hozzáférhet dokumentumaihoz."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Cégalapítás",
+        text: "Kkv-k és nagyvállalatok számára, kedvező áron, teljes jogi támogatással."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Könyvelés",
+        text: "Tapasztalt szakembereink biztosítják cége teljes körű könyvelését."
+      }
+    ],
+    pricing: {
+      title: "Székhelyszolgáltatás Áraink",
+      items: [
+        "Csak 164 Ft / nap",
+        "1 év + 2 hónap ingyen: bruttó 70.000 Ft / év (5.000 Ft / hó)",
+        "Szerződés megfelel a 7/2017. (VI.1.) IM rendeletnek",
+        "Ajándék: 2 extra hónap + bélyegzőház"
+      ],
+      text: "Szolgáltatásunkat saját tulajdonú ingatlanokban nyújtjuk, három modern budapesti irodában."
+    },
+offices: {
+  title: "Irodáink",
+  list: [
+    {
+      name: "THE LORD IS CARING KFT",
+      address: "1083 Budapest, Baross utca 103. fszt."
+    },
+    {
+      name: "1906 AZUSA STREET KFT",
+      address: "1083 Budapest, Práter utca 59."
+    },
+    {
+      name: "FIVE TAILORS COMPANY KFT",
+      address: "1077 Budapest, Izabella utca 3/A."
+    }
+  ],
+  text: "Mindhárom irodánk könnyen megközelíthető, modern irodaházakban, tömegközlekedési csomópontok közelében."
+},
+    services: {
+      title: "Szolgáltatásaink",
+      items: [
+        "Levelezési cím: Professzionális megjelenés cége számára",
+        "Adókártya igénylés: 1 nap alatt, 10.000 Ft",
+        "Könyvelés: Tapasztalt szakemberekkel",
+        "Cégalapítás: Gyorsan, kedvező áron",
+        "Telefonos ügyfélszolgálat: Megbízható támogatás"
+      ]
+    },
+    contact: {
+      title: "Kapcsolat",
+      manager: "Irodavezető: Szabó Guszti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Kérdése van? Vegye fel velünk a kapcsolatot!",
+      cta: "Email küldése"
+    },
+    company_details: {
+      title: "Elérhetőségeink és Adatok",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budapest, Baross utca 103. fszt.",
+          tax_number: "Adószám: 26698087-1-42",
+          bank: "Számlaszám: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budapest, Práter utca 59.",
+          tax_number: "Adószám: 26698197-1-42",
+          bank: "Számlaszám: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budapest, Izabella utca 3/A.",
+          tax_number: "Adószám: 26698166-1-42",
+          bank: "Számlaszám: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Professzionális székhelyszolgáltatás Budapesten három modern irodában.",
+      quick_links: {
+        title: "Gyorslinkek",
+        links: ["Szolgáltatások", "Árak", "Kapcsolat"]
+      },
+      contact: {
+        title: "Elérhetőség",
+        address: "1083 Budapest, Baross utca 103.",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Székhelyszolgáltatás, cégalapítás, könyvelés | Minden jog fenntartva"
+    }
+  },
+  en: { // English
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Services",
+      registered_office: "Registered Office Services",
+      company_formation: "Company Formation",
+      contact: "Contact",
+      dropdown_registered_office: [
+        "What is a registered office",
+        "Registered office service",
+        "Registered office in Budapest",
+        "Registered office for sole proprietors"
+      ],
+      dropdown_services: [
+        "Company formation in Budapest",
+        "Mailing address service",
+        "Tax card application",
+        "Accounting"
+      ],
+      dropdown_company_formation: [
+        "Company formation",
+        "Choosing a company name",
+        "How to start a business"
+      ]
+    },
+    header: {
+      title: "Professional Registered Office Services in Budapest",
+      price: "ONLY 164 Ft / day",
+      subtitle: "Comprehensive company services - fast, reliable, affordable",
+      cta: "Contact Now"
+    },
+    hero: {
+      title: "Why Choose Us?",
+      text: "The registered office is the central administrative location of your company, where official mail arrives and documents are stored. Our services are provided in three Budapest offices, in our own properties, with full administrative support.",
+      cta: "Get in Touch"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Mail Handling",
+        text: "We scan your mail free of charge and send it via email, so you can access your documents from anywhere."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Company Formation",
+        text: "For SMEs and large companies alike, at the best price, with full legal support."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Accounting",
+        text: "Our experienced professionals ensure comprehensive accounting for your company."
+      }
+    ],
+    pricing: {
+      title: "Registered Office Pricing",
+      items: [
+        "Only 164 Ft / day",
+        "1 year + 2 months free: 70,000 Ft / year (5,000 Ft / month)",
+        "Contract complies with IM Decree 7/2017 (VI.1)",
+        "Gift: 2 extra months + stamp housing"
+      ],
+      text: "Our services are provided in our own properties, in three modern Budapest offices."
+    },
+    offices: {
+      title: "Our Offices",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Budapest, Baross utca 103. ground floor"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Budapest, Práter utca 59."
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Budapest, Izabella utca 3/A."
+        }
+      ],
+      text: "All three offices are easily accessible, located in modern office buildings near public transport hubs."
+    },
+    services: {
+      title: "Our Services",
+      items: [
+        "Mailing address: Professional appearance for your company",
+        "Tax card application: In 1 day for 10,000 Ft",
+        "Accounting: With experienced professionals",
+        "Company formation: Quickly, at an affordable price",
+        "Telephone customer service: Reliable support"
+      ]
+    },
+    contact: {
+      title: "Contact",
+      manager: "Office Manager: Szabó Guszti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Have a question? Get in touch with us!",
+      cta: "Send Email"
+    },
+    company_details: {
+      title: "Contact and Company Details",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budapest, Baross utca 103. ground floor",
+          tax_number: "Tax number: 26698087-1-42",
+          bank: "Account number: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budapest, Práter utca 59.",
+          tax_number: "Tax number: 26698197-1-42",
+          bank: "Account number: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budapest, Izabella utca 3/A.",
+          tax_number: "Tax number: 26698166-1-42",
+          bank: "Account number: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Professional registered office services in Budapest at three modern offices.",
+      quick_links: {
+        title: "Quick Links",
+        links: ["Services", "Pricing", "Contact"]
+      },
+      contact: {
+        title: "Contact",
+        address: "1083 Budapest, Baross utca 103.",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Registered office services, company formation, accounting | All rights reserved"
+    }
+  },
+  uk: { // Ukrainian
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Послуги",
+      registered_office: "Послуги юридичної адреси",
+      company_formation: "Створення компанії",
+      contact: "Контакти",
+      dropdown_registered_office: [
+        "Що таке юридична адреса",
+        "Послуга юридичної адреси",
+        "Юридична адреса в Будапешті",
+        "Юридична адреса для ФОП"
+      ],
+      dropdown_services: [
+        "Створення компанії в Будапешті",
+        "Послуга поштової адреси",
+        "Оформлення податкової картки",
+        "Бухгалтерія"
+      ],
+      dropdown_company_formation: [
+        "Створення компанії",
+        "Вибір назви компанії",
+        "Як розпочати бізнес"
+      ]
+    },
+    header: {
+      title: "Професійні послуги юридичної адреси в Будапешті",
+      price: "ЛИШЕ 164 Ft / день",
+      subtitle: "Комплексні послуги для компаній - швидко, надійно, доступно",
+      cta: "Зв’язатися зараз"
+    },
+    hero: {
+      title: "Чому обрати нас?",
+      text: "Юридична адреса – це центральне місце адміністративного управління вашої компанії, куди надходять офіційні листи та зберігаються документи. Наші послуги надаються в трьох офісах Будапешта, у власних приміщеннях, з повною адміністративною підтримкою.",
+      cta: "Зв’язатися"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Обробка кореспонденції",
+        text: "Ми безкоштовно скануємо ваші листи та надсилаємо їх електронною поштою, щоб ви могли отримати доступ до документів з будь-якого місця."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Створення компанії",
+        text: "Для малого та великого бізнесу за найкращою ціною з повною юридичною підтримкою."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Бухгалтерія",
+        text: "Наші досвідчені фахівці забезпечують повний бухгалтерський облік для вашої компанії."
+      }
+    ],
+    pricing: {
+      title: "Вартість послуг юридичної адреси",
+      items: [
+        "Лише 164 Ft / день",
+        "1 рік + 2 місяці безкоштовно: 70 000 Ft / рік (5 000 Ft / місяць)",
+        "Договір відповідає указу IM 7/2017 (VI.1)",
+        "Подарунок: 2 додаткові місяці + футляр для печатки"
+      ],
+      text: "Наші послуги надаються у власних приміщеннях у трьох сучасних офісах Будапешта."
+    },
+    offices: {
+      title: "Наші офіси",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Будапешт, вул. Барош, 103, перший поверх"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Будапешт, вул. Пратер, 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Будапешт, вул. Ізабелла, 3/А"
+        }
+      ],
+      text: "Усі три офіси легко доступні, розташовані в сучасних офісних будівлях поблизу транспортних вузлів."
+    },
+    services: {
+      title: "Наші послуги",
+      items: [
+        "Поштова адреса: Професійний вигляд вашої компанії",
+        "Оформлення податкової картки: За 1 день за 10 000 Ft",
+        "Бухгалтерія: З досвідченими фахівцями",
+        "Створення компанії: Швидко, за доступною ціною",
+        "Телефонна підтримка клієнтів: Надійна допомога"
+      ]
+    },
+    contact: {
+      title: "Контакти",
+      manager: "Керівник офісу: Сабo Густі",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Маєте запитання? Зв’яжіться з нами!",
+      cta: "Надіслати email"
+    },
+    company_details: {
+      title: "Контактні дані та інформація",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Будапешт, вул. Барош, 103, перший поверх",
+          tax_number: "Податковий номер: 26698087-1-42",
+          bank: "Номер рахунку: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Будапешт, вул. Пратер, 59",
+          tax_number: "Податковий номер: 26698197-1-42",
+          bank: "Номер рахунку: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Будапешт, вул. Ізабелла, 3/А",
+          tax_number: "Податковий номер: 26698166-1-42",
+          bank: "Номер рахунку: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Професійні послуги юридичної адреси в Будапешті в трьох сучасних офісах.",
+      quick_links: {
+        title: "Швидкі посилання",
+        links: ["Послуги", "Ціни", "Контакти"]
+      },
+      contact: {
+        title: "Контакти",
+        address: "1083 Будапешт, вул. Барош, 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Послуги юридичної адреси, створення компанії, бухгалтерія | Усі права захищено"
+    }
+  },
+  ru: { // Russian
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Услуги",
+      registered_office: "Услуги юридического адреса",
+      company_formation: "Создание компании",
+      contact: "Контакты",
+      dropdown_registered_office: [
+        "Что такое юридический адрес",
+        "Услуга юридического адреса",
+        "Юридический адрес в Будапеште",
+        "Юридический адрес для индивидуальных предпринимателей"
+      ],
+      dropdown_services: [
+        "Создание компании в Будапеште",
+        "Услуга почтового адреса",
+        "Оформление налоговой карты",
+        "Бухгалтерия"
+      ],
+      dropdown_company_formation: [
+        "Создание компании",
+        "Выбор названия компании",
+        "Как начать бизнес"
+      ]
+    },
+    header: {
+      title: "Профессиональные услуги юридического адреса в Будапеште",
+      price: "ТОЛЬКО 164 Ft / день",
+      subtitle: "Комплексные услуги для компаний - быстро, надежно, доступно",
+      cta: "Связаться сейчас"
+    },
+    hero: {
+      title: "Почему выбирают нас?",
+      text: "Юридический адрес – это центральное место административного управления вашей компании, куда приходят официальные письма и хранятся документы. Наши услуги предоставляются в трех офисах Будапешта, в собственных помещениях, с полной административной поддержкой.",
+      cta: "Связаться"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Обработка корреспонденции",
+        text: "Мы бесплатно сканируем ваши письма и отправляем их по электронной почте, чтобы вы могли получить доступ к документам из любого места."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Создание компании",
+        text: "Для малого и крупного бизнеса по лучшей цене с полной юридической поддержкой."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Бухгалтерия",
+        text: "Наши опытные специалисты обеспечивают полный бухгалтерский учет для вашей компании."
+      }
+    ],
+    pricing: {
+      title: "Стоимость услуг юридического адреса",
+      items: [
+        "Только 164 Ft / день",
+        "1 год + 2 месяца бесплатно: 70 000 Ft / год (5 000 Ft / месяц)",
+        "Договор соответствует указу IM 7/2017 (VI.1)",
+        "Подарок: 2 дополнительных месяца + футляр для печати"
+      ],
+      text: "Наши услуги предоставляются в собственных помещениях в трех современных офисах Будапешта."
+    },
+    offices: {
+      title: "Наши офисы",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Будапешт, ул. Барош, 103, первый этаж"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Будапешт, ул. Пратер, 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Будапешт, ул. Изабелла, 3/А"
+        }
+      ],
+      text: "Все три офиса легко доступны, расположены в современных офисных зданиях рядом с транспортными узлами."
+    },
+    services: {
+      title: "Наши услуги",
+      items: [
+        "Почтовый адрес: Профессиональный вид вашей компании",
+        "Оформление налоговой карты: За 1 день за 10 000 Ft",
+        "Бухгалтерия: С опытными специалистами",
+        "Создание компании: Быстро, по доступной цене",
+        "Телефонная поддержка клиентов: Надежная помощь"
+      ]
+    },
+    contact: {
+      title: "Контакты",
+      manager: "Руководитель офиса: Сабо Густи",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Есть вопросы? Свяжитесь с нами!",
+      cta: "Отправить email"
+    },
+    company_details: {
+      title: "Контактные данные и информация",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Будапешт, ул. Барош, 103, первый этаж",
+          tax_number: "Налоговый номер: 26698087-1-42",
+          bank: "Номер счета: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Будапешт, ул. Пратер, 59",
+          tax_number: "Налоговый номер: 26698197-1-42",
+          bank: "Номер счета: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Будапешт, ул. Изабелла, 3/А",
+          tax_number: "Налоговый номер: 26698166-1-42",
+          bank: "Номер счета: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Профессиональные услуги юридического адреса в Будапеште в трех современных офисах.",
+      quick_links: {
+        title: "Быстрые ссылки",
+        links: ["Услуги", "Цены", "Контакты"]
+      },
+      contact: {
+        title: "Контакты",
+        address: "1083 Будапешт, ул. Барош, 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Услуги юридического адреса, создание компании, бухгалтерия | Все права защищены"
+    }
+  },
+  it: { // Italian
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Servizi",
+      registered_office: "Servizi di sede legale",
+      company_formation: "Costituzione aziendale",
+      contact: "Contatti",
+      dropdown_registered_office: [
+        "Cos'è una sede legale",
+        "Servizio di sede legale",
+        "Sede legale a Budapest",
+        "Sede legale per imprenditori individuali"
+      ],
+      dropdown_services: [
+        "Costituzione aziendale a Budapest",
+        "Servizio di indirizzo postale",
+        "Richiesta carta fiscale",
+        "Contabilità"
+      ],
+      dropdown_company_formation: [
+        "Costituzione aziendale",
+        "Scelta del nome aziendale",
+        "Come avviare un'attività"
+      ]
+    },
+    header: {
+      title: "Servizi professionali di sede legale a Budapest",
+      price: "SOLO 164 Ft / giorno",
+      subtitle: "Servizi aziendali completi - veloci, affidabili, convenienti",
+      cta: "Contattaci ora"
+    },
+    hero: {
+      title: "Perché scegliere noi?",
+      text: "La sede legale è il luogo centrale di gestione amministrativa della tua azienda, dove arrivano le lettere ufficiali e vengono conservati i documenti. I nostri servizi sono offerti in tre uffici a Budapest, in proprietà di nostra proprietà, con supporto amministrativo completo.",
+      cta: "Contattaci"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Gestione della corrispondenza",
+        text: "Scansioniamo gratuitamente la tua posta e la inviamo via email, così puoi accedere ai tuoi documenti ovunque."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Costituzione aziendale",
+        text: "Per PMI e grandi aziende, al miglior prezzo, con pieno supporto legale."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Contabilità",
+        text: "I nostri professionisti esperti garantiscono una contabilità completa per la tua azienda."
+      }
+    ],
+    pricing: {
+      title: "Prezzi dei servizi di sede legale",
+      items: [
+        "Solo 164 Ft / giorno",
+        "1 anno + 2 mesi gratis: 70.000 Ft / anno (5.000 Ft / mese)",
+        "Il contratto è conforme al decreto IM 7/2017 (VI.1)",
+        "Regalo: 2 mesi extra + custodia per timbro"
+      ],
+      text: "I nostri servizi sono offerti in proprietà di nostra proprietà, in tre moderni uffici a Budapest."
+    },
+    offices: {
+      title: "I nostri uffici",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Budapest, via Baross 103, piano terra"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Budapest, via Práter 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Budapest, via Izabella 3/A"
+        }
+      ],
+      text: "Tutti e tre gli uffici sono facilmente accessibili, situati in moderni edifici per uffici vicino a nodi di trasporto pubblico."
+    },
+    services: {
+      title: "I nostri servizi",
+      items: [
+        "Indirizzo postale: Aspetto professionale per la tua azienda",
+        "Richiesta carta fiscale: In 1 giorno per 10.000 Ft",
+        "Contabilità: Con professionisti esperti",
+        "Costituzione aziendale: Veloce, a prezzi accessibili",
+        "Assistenza clienti telefonica: Supporto affidabile"
+      ]
+    },
+    contact: {
+      title: "Contatti",
+      manager: "Responsabile ufficio: Szabó Guszti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Hai domande? Contattaci!",
+      cta: "Invia email"
+    },
+    company_details: {
+      title: "Contatti e dettagli aziendali",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budapest, via Baross 103, piano terra",
+          tax_number: "Codice fiscale: 26698087-1-42",
+          bank: "Numero di conto: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budapest, via Práter 59",
+          tax_number: "Codice fiscale: 26698197-1-42",
+          bank: "Numero di conto: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budapest, via Izabella 3/A",
+          tax_number: "Codice fiscale: 26698166-1-42",
+          bank: "Numero di conto: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Servizi professionali di sede legale a Budapest in tre moderni uffici.",
+      quick_links: {
+        title: "Link rapidi",
+        links: ["Servizi", "Prezzi", "Contatti"]
+      },
+      contact: {
+        title: "Contatti",
+        address: "1083 Budapest, via Baross 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Servizi di sede legale, costituzione aziendale, contabilità | Tutti i diritti riservati"
+    }
+  },
+  ro: { // Romanian
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Servicii",
+      registered_office: "Servicii de sediu social",
+      company_formation: "Înființare companie",
+      contact: "Contact",
+      dropdown_registered_office: [
+        "Ce este un sediu social",
+        "Serviciu de sediu social",
+        "Sediu social în Budapesta",
+        "Sediu social pentru întreprinzători individuali"
+      ],
+      dropdown_services: [
+        "Înființare companie în Budapesta",
+        "Serviciu de adresă poștală",
+        "Cerere card fiscal",
+        "Contabilitate"
+      ],
+      dropdown_company_formation: [
+        "Înființare companie",
+        "Alegerea numelui companiei",
+        "Cum să începi o afacere"
+      ]
+    },
+    header: {
+      title: "Servicii profesionale de sediu social în Budapesta",
+      price: "DOAR 164 Ft / zi",
+      subtitle: "Servicii complete pentru companii - rapid, fiabil, accesibil",
+      cta: "Contactează acum"
+    },
+    hero: {
+      title: "De ce să ne alegi?",
+      text: "Sediul social este locația centrală de gestionare administrativă a companiei tale, unde sosesc scrisorile oficiale și sunt stocate documentele. Serviciile noastre sunt oferite în trei birouri din Budapesta, în proprietăți proprii, cu suport administrativ complet.",
+      cta: "Contactează-ne"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Gestionarea corespondenței",
+        text: "Îți scanăm corespondența gratuit și o trimitem prin email, astfel încât să ai acces la documentele tale de oriunde."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Înființare companie",
+        text: "Pentru IMM-uri și companii mari, la cel mai bun preț, cu suport juridic complet."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Contabilitate",
+        text: "Profesioniștii noștri experimentați asigură contabilitatea completă a companiei tale."
+      }
+    ],
+    pricing: {
+      title: "Prețuri pentru serviciile de sediu social",
+      items: [
+        "Doar 164 Ft / zi",
+        "1 an + 2 luni gratuite: 70.000 Ft / an (5.000 Ft / lună)",
+        "Contractul respectă Decretul IM 7/2017 (VI.1)",
+        "Cadou: 2 luni suplimentare + carcasă pentru ștampilă"
+      ],
+      text: "Serviciile noastre sunt oferite în proprietăți proprii, în trei birouri moderne din Budapesta."
+    },
+    offices: {
+      title: "Birourile noastre",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Budapesta, strada Baross 103, parter"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Budapesta, strada Práter 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Budapesta, strada Izabella 3/A"
+        }
+      ],
+      text: "Toate cele trei birouri sunt ușor accesibile, situate în clădiri de birouri moderne, aproape de noduri de transport public."
+    },
+    services: {
+      title: "Serviciile noastre",
+      items: [
+        "Adresă poștală: Aspect profesional pentru compania ta",
+        "Cerere card fiscal: În 1 zi pentru 10.000 Ft",
+        "Contabilitate: Cu profesioniști experimentați",
+        "Înființare companie: Rapid, la preț accesibil",
+        "Serviciu clienți telefonic: Suport fiabil"
+      ]
+    },
+    contact: {
+      title: "Contact",
+      manager: "Manager birou: Szabó Guszti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Ai întrebări? Contactează-ne!",
+      cta: "Trimite email"
+    },
+    company_details: {
+      title: "Contact și detalii companie",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budapesta, strada Baross 103, parter",
+          tax_number: "Număr fiscal: 26698087-1-42",
+          bank: "Număr cont: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budapesta, strada Práter 59",
+          tax_number: "Număr fiscal: 26698197-1-42",
+          bank: "Număr cont: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budapesta, strada Izabella 3/A",
+          tax_number: "Număr fiscal: 26698166-1-42",
+          bank: "Număr cont: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Servicii profesionale de sediu social în Budapesta în trei birouri moderne.",
+      quick_links: {
+        title: "Linkuri rapide",
+        links: ["Servicii", "Prețuri", "Contact"]
+      },
+      contact: {
+        title: "Contact",
+        address: "1083 Budapesta, strada Baross 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Servicii de sediu social, înființare companie, contabilitate | Toate drepturile rezervate"
+    }
+  },
+  de: { // German
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Dienstleistungen",
+      registered_office: "Sitzdienstleistungen",
+      company_formation: "Firmengründung",
+      contact: "Kontakt",
+      dropdown_registered_office: [
+        "Was ist ein Firmensitz",
+        "Sitzdienst",
+        "Firmensitz in Budapest",
+        "Firmensitz für Einzelunternehmer"
+      ],
+      dropdown_services: [
+        "Firmengründung in Budapest",
+        "Postadresse-Dienst",
+        "Antrag auf Steuerkarte",
+        "Buchhaltung"
+      ],
+      dropdown_company_formation: [
+        "Firmengründung",
+        "Auswahl des Firmennamens",
+        "Wie man ein Unternehmen gründet"
+      ]
+    },
+    header: {
+      title: "Professionelle Sitzdienstleistungen in Budapest",
+      price: "NUR 164 Ft / Tag",
+      subtitle: "Umfassende Unternehmensdienstleistungen - schnell, zuverlässig, erschwinglich",
+      cta: "Jetzt kontaktieren"
+    },
+    hero: {
+      title: "Warum uns wählen?",
+      text: "Der Firmensitz ist der zentrale Verwaltungsort Ihres Unternehmens, an dem offizielle Post ankommt und Dokumente aufbewahrt werden. Unsere Dienstleistungen werden in drei Büros in Budapest, in eigenen Immobilien, mit umfassender administrativer Unterstützung angeboten.",
+      cta: "Kontakt aufnehmen"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Postbearbeitung",
+        text: "Wir scannen Ihre Post kostenlos und senden sie per E-Mail, sodass Sie von überall auf Ihre Dokumente zugreifen können."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Firmengründung",
+        text: "Für KMUs und große Unternehmen, zum besten Preis, mit vollständiger rechtlicher Unterstützung."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Buchhaltung",
+        text: "Unsere erfahrenen Fachleute sorgen für eine umfassende Buchhaltung Ihres Unternehmens."
+      }
+    ],
+    pricing: {
+      title: "Preise für Sitzdienstleistungen",
+      items: [
+        "Nur 164 Ft / Tag",
+        "1 Jahr + 2 Monate kostenlos: 70.000 Ft / Jahr (5.000 Ft / Monat)",
+        "Vertrag entspricht der IM-Verordnung 7/2017 (VI.1)",
+        "Geschenk: 2 zusätzliche Monate + Stempelgehäuse"
+      ],
+      text: "Unsere Dienstleistungen werden in eigenen Immobilien in drei modernen Büros in Budapest angeboten."
+    },
+    offices: {
+      title: "Unsere Büros",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Budapest, Baross Straße 103, Erdgeschoss"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Budapest, Práter Straße 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Budapest, Izabella Straße 3/A"
+        }
+      ],
+      text: "Alle drei Büros sind leicht erreichbar, in modernen Bürogebäuden in der Nähe von Verkehrsknotenpunkten gelegen."
+    },
+    services: {
+      title: "Unsere Dienstleistungen",
+      items: [
+        "Postadresse: Professionelles Erscheinungsbild für Ihr Unternehmen",
+        "Antrag auf Steuerkarte: In 1 Tag für 10.000 Ft",
+        "Buchhaltung: Mit erfahrenen Fachleuten",
+        "Firmengründung: Schnell, zu erschwinglichen Preisen",
+        "Telefonischer Kundenservice: Zuverlässige Unterstützung"
+      ]
+    },
+    contact: {
+      title: "Kontakt",
+      manager: "Büroleiter: Szabó Guszti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Haben Sie Fragen? Kontaktieren Sie uns!",
+      cta: "E-Mail senden"
+    },
+    company_details: {
+      title: "Kontakt und Unternehmensdaten",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budapest, Baross Straße 103, Erdgeschoss",
+          tax_number: "Steuernummer: 26698087-1-42",
+          bank: "Kontonummer: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budapest, Práter Straße 59",
+          tax_number: "Steuernummer: 26698197-1-42",
+          bank: "Kontonummer: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budapest, Izabella Straße 3/A",
+          tax_number: "Steuernummer: 26698166-1-42",
+          bank: "Kontonummer: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Professionelle Sitzdienstleistungen in Budapest in drei modernen Büros.",
+      quick_links: {
+        title: "Schnelllinks",
+        links: ["Dienstleistungen", "Preise", "Kontakt"]
+      },
+      contact: {
+        title: "Kontakt",
+        address: "1083 Budapest, Baross Straße 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Sitzdienstleistungen, Firmengründung, Buchhaltung | Alle Rechte vorbehalten"
+    }
+  },
+  sr: { // Serbian
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "Usluge",
+      registered_office: "Usluge registrovanog sedišta",
+      company_formation: "Osnivanje kompanije",
+      contact: "Kontakt",
+      dropdown_registered_office: [
+        "Šta je registrovano sedište",
+        "Usluga registrovanog sedišta",
+        "Registrovano sedište u Budimpešti",
+        "Registrovano sedište za samostalne preduzetnike"
+      ],
+      dropdown_services: [
+        "Osnivanje kompanije u Budimpešti",
+        "Usluga poštanske adrese",
+        "Zahtev za poresku karticu",
+        "Računovodstvo"
+      ],
+      dropdown_company_formation: [
+        "Osnivanje kompanije",
+        "Izbor naziva kompanije",
+        "Kako započeti poslovanje"
+      ]
+    },
+    header: {
+      title: "Profesionalne usluge registrovanog sedišta u Budimpešti",
+      price: "SAMO 164 Ft / dan",
+      subtitle: "Kompletne usluge za kompanije - brzo, pouzdano, povoljno",
+      cta: "Kontaktirajte sada"
+    },
+    hero: {
+      title: "Zašto izabrati nas?",
+      text: "Registrovano sedište je centralno mesto administrativnog upravljanja vaše kompanije, gde stižu zvanična pisma i čuvaju se dokumenti. Naše usluge se pružaju u tri kancelarije u Budimpešti, u sopstvenim nekretninama, uz punu administrativnu podršku.",
+      cta: "Kontaktirajte nas"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "Upravljanje poštom",
+        text: "Besplatno skeniramo vašu poštu i šaljemo je putem e-maila, tako da možete pristupiti dokumentima sa bilo kog mesta."
+      },
+      {
+        icon: "fas fa-building",
+        title: "Osnivanje kompanije",
+        text: "Za mala i velika preduzeća, po najboljoj ceni, uz punu pravnu podršku."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "Računovodstvo",
+        text: "Naši iskusni stručnjaci obezbeđuju kompletno računovodstvo za vašu kompaniju."
+      }
+    ],
+    pricing: {
+      title: "Cene usluga registrovanog sedišta",
+      items: [
+        "Samo 164 Ft / dan",
+        "1 godina + 2 meseca besplatno: 70.000 Ft / godina (5.000 Ft / mesec)",
+        "Ugovor je u skladu sa uredbom IM 7/2017 (VI.1)",
+        "Poklon: 2 dodatna meseca + kućište za pečat"
+      ],
+      text: "Naše usluge se pružaju u sopstvenim nekretninama u tri moderne kancelarije u Budimpešti."
+    },
+    offices: {
+      title: "Naše kancelarije",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "1083 Budimpešta, ulica Baroš 103, prizemlje"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "1083 Budimpešta, ulica Prater 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "1077 Budimpešta, ulica Izabela 3/A"
+        }
+      ],
+      text: "Sve tri kancelarije su lako dostupne, smeštene u modernim poslovnim zgradama u blizini saobraćajnih čvorišta."
+    },
+    services: {
+      title: "Naše usluge",
+      items: [
+        "Poštanska adresa: Profesionalni izgled vaše kompanije",
+        "Zahtev za poresku karticu: Za 1 dan za 10.000 Ft",
+        "Računovodstvo: Sa iskusnim stručnjacima",
+        "Osnivanje kompanije: Brzo, po povoljnoj ceni",
+        "Telefonska korisnička podrška: Pouzdana pomoć"
+      ]
+    },
+    contact: {
+      title: "Kontakt",
+      manager: "Rukovodilac kancelarije: Sabo Gusti",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "Imate pitanja? Kontaktirajte nas!",
+      cta: "Pošalji e-mail"
+    },
+    company_details: {
+      title: "Kontakt i podaci o kompaniji",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "1083 Budimpešta, ulica Baroš 103, prizemlje",
+          tax_number: "Poreski broj: 26698087-1-42",
+          bank: "Broj računa: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "1083 Budimpešta, ulica Prater 59",
+          tax_number: "Poreski broj: 26698197-1-42",
+          bank: "Broj računa: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "1077 Budimpešta, ulica Izabela 3/A",
+          tax_number: "Poreski broj: 26698166-1-42",
+          bank: "Broj računa: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "Profesionalne usluge registrovanog sedišta u Budimpešti u tri moderne kancelarije.",
+      quick_links: {
+        title: "Brzi linkovi",
+        links: ["Usluge", "Cene", "Kontakt"]
+      },
+      contact: {
+        title: "Kontakt",
+        address: "1083 Budimpešta, ulica Baroš 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | Usluge registrovanog sedišta, osnivanje kompanije, računovodstvo | Sva prava zadržana"
+    }
+  },
+  ar: {
+    navbar: {
+      brand: "meghatalmazott.hu",
+      services: "الخدمات",
+      registered_office: "خدمات المقر الرسمي",
+      company_formation: "تأسيس شركة",
+      contact: "اتصل بنا",
+      dropdown_registered_office: [
+        "ما هو المقر الرسمي",
+        "خدمة المقر الرسمي",
+        "المقر الرسمي في بودابست",
+        "المقر الرسمي للأفراد المتداولين"
+      ],
+      dropdown_services: [
+        "تأسيس شركة في بودابست",
+        "خدمة العنوان البريدي",
+        "طلب بطاقة ضريبية",
+        "المحاسبة"
+      ],
+      dropdown_company_formation: [
+        "تأسيس شركة",
+        "اختيار اسم الشركة",
+        "كيفية بدء عمل تجاري"
+      ]
+    },
+    header: {
+      title: "خدمات المقر الرسمي الاحترافية في بودابست",
+      price: "فقط 164 فورنت / يوم",
+      subtitle: "خدمات شاملة للشركات - سريعة، موثوقة، وبأسعار معقولة",
+      cta: "تواصل الآن"
+    },
+    hero: {
+      title: "لماذا تختارنا؟",
+      text: "المقر الرسمي هو الموقع الإداري المركزي لشركتك، حيث تصل الرسائل الرسمية وتُخزن الوثائق. تُقدم خدماتنا في ثلاثة مكاتب في بودابست، في عقارات مملوكة لنا، مع دعم إداري كامل.",
+      cta: "تواصل معنا"
+    },
+    features: [
+      {
+        icon: "fas fa-envelope-open-text",
+        title: "إدارة البريد",
+        text: "نقوم بمسح بريدك مجانًا وإرساله عبر البريد الإلكتروني، حتى تتمكن من الوصول إلى وثائقك من أي مكان."
+      },
+      {
+        icon: "fas fa-building",
+        title: "تأسيس شركة",
+        text: "للشركات الصغيرة والمتوسطة والكبيرة، بأفضل الأسعار، مع دعم قانوني كامل."
+      },
+      {
+        icon: "fas fa-calculator",
+        title: "المحاسبة",
+        text: "يضمن محترفونا ذوو الخبرة المحاسبة الشاملة لشركتك."
+      }
+    ],
+    pricing: {
+      title: "أسعار خدمات المقر الرسمي",
+      items: [
+        "فقط 164 فورنت / يوم",
+        "سنة واحدة + شهران مجانًا: 70,000 فورنت / سنة (5,000 فورنت / شهر)",
+        "العقد يتوافق مع مرسوم IM 7/2017 (VI.1)",
+        "هدية: شهران إضافيان + علبة ختم"
+      ],
+      text: "تُقدم خدماتنا في عقارات مملوكة لنا، في ثلاثة مكاتب حديثة في بودابست."
+    },
+    offices: {
+      title: "مكاتبنا",
+      list: [
+        {
+          name: "THE LORD IS CARING KFT",
+          address: "بودابست 1083، شارع باروس 103، الطابق الأرضي"
+        },
+        {
+          name: "1906 AZUSA STREET KFT",
+          address: "بودابست 1083، شارع براتير 59"
+        },
+        {
+          name: "FIVE TAILORS COMPANY KFT",
+          address: "بودابست 1077، شارع إيزابيلا 3/أ"
+        }
+      ],
+      text: "جميع مكاتبنا الثلاثة يسهل الوصول إليها، وتقع في مباني مكاتب حديثة بالقرب من مراكز النقل العام."
+    },
+    services: {
+      title: "خدماتنا",
+      items: [
+        "عنوان بريدي: مظهر احترافي لشركتك",
+        "طلب بطاقة ضريبية: في يوم واحد مقابل 10,000 فورنت",
+        "المحاسبة: مع محترفين ذوي خبرة",
+        "تأسيس شركة: بسرعة وبسعر معقول",
+        "خدمة العملاء عبر الهاتف: دعم موثوق"
+      ]
+    },
+    contact: {
+      title: "اتصل بنا",
+      manager: "مدير المكتب: سابو غوستي",
+      email: "info@meghatalmazott.hu",
+      phone: "+36 20 463 5994",
+      text: "هل لديك أسئلة؟ تواصل معنا!",
+      cta: "إرسال بريد إلكتروني"
+    },
+    company_details: {
+      title: "تفاصيل الاتصال والشركة",
+      companies: [
+        {
+          name: "The Lord is Caring Kft",
+          address: "بودابست 1083، شارع باروس 103، الطابق الأرضي",
+          tax_number: "رقم الضريبة: 26698087-1-42",
+          bank: "رقم الحساب: 10103104-29753800-01005008"
+        },
+        {
+          name: "1906 Azusa Street Kft",
+          address: "بودابست 1083، شارع براتير 59",
+          tax_number: "رقم الضريبة: 26698197-1-42",
+          bank: "رقم الحساب: 10103104-29753100-01005007"
+        },
+        {
+          name: "Five Tailors Company Kft",
+          address: "بودابست 1077، شارع إيزابيلا 3/أ",
+          tax_number: "رقم الضريبة: 26698166-1-42",
+          bank: "رقم الحساب: 10103104-29757300-01005007"
+        }
+      ]
+    },
+    footer: {
+      logo: "meghatalmazott.hu",
+      description: "خدمات المقر الرسمي الاحترافية في بودابست في ثلاثة مكاتب حديثة.",
+      quick_links: {
+        title: "روابط سريعة",
+        links: ["الخدمات", "الأسعار", "اتصل بنا"]
+      },
+      contact: {
+        title: "اتصل بنا",
+        address: "بودابست 1083، شارع باروس 103",
+        email: "info@meghatalmazott.hu",
+        phone: "+36 20 463 5994"
+      },
+      copyright: "© 2025 meghatalmazott.hu | خدمات المقر الرسمي، تأسيس الشركات، المحاسبة | جميع الحقوق محفوظة"
+    }
+  }
+
+};
+
+
+
+
+function updateContent(lang) {
+  const t = translations[lang];
+
+  // Set document language for RTL support (e.g., Arabic)
+  document.documentElement.setAttribute('lang', lang);
+
+  // Update navbar
+  document.querySelector('.navbar-brand').textContent = t.navbar.brand;
+  document.querySelectorAll('.navbar-link')[0].textContent = t.navbar.registered_office;
+  document.querySelectorAll('.navbar-link')[1].textContent = t.navbar.services;
+  document.querySelectorAll('.navbar-link')[2].textContent = t.navbar.company_formation;
+  document.querySelectorAll('.navbar-link')[3].textContent = t.navbar.contact;
+
+  // Update dropdowns
+  document.querySelectorAll('.dropdown-menu')[0].querySelectorAll('.dropdown-link').forEach((link, i) => {
+    link.textContent = t.navbar.dropdown_registered_office[i];
+  });
+  document.querySelectorAll('.dropdown-menu')[1].querySelectorAll('.dropdown-link').forEach((link, i) => {
+    link.textContent = t.navbar.dropdown_services[i];
+  });
+  document.querySelectorAll('.dropdown-menu')[2].querySelectorAll('.dropdown-link').forEach((link, i) => {
+    link.textContent = t.navbar.dropdown_company_formation[i];
+  });
+
+  // Update header
+  document.querySelector('.header-content h1').textContent = t.header.title;
+  document.querySelector('.price-highlight').textContent = t.header.price;
+  document.querySelector('.header-content p').textContent = t.header.subtitle;
+  document.querySelector('.header-content .btn').textContent = t.header.cta;
+
+  // Update hero
+  document.querySelector('.hero-text h2').textContent = t.hero.title;
+  document.querySelector('.hero-text p').textContent = t.hero.text;
+  document.querySelector('.hero-text .btn').textContent = t.hero.cta;
+
+  // Update features
+  document.querySelectorAll('.feature').forEach((feature, i) => {
+    feature.querySelector('h3').textContent = t.features[i].title;
+    feature.querySelector('p').textContent = t.features[i].text;
+  });
+
+  // Update pricing
+  document.querySelector('.card:nth-child(3) h2').textContent = t.pricing.title;
+  document.querySelector('.card:nth-child(3) ul').innerHTML = t.pricing.items.map(item => `<li>${item}</li>`).join('');
+  document.querySelector('.card:nth-child(3) p').textContent = t.pricing.text;
+
+  // Update offices
+  document.querySelector('.card:nth-child(4) h2').textContent = t.offices.title;
+  document.querySelector('.card:nth-child(4) ul').innerHTML = t.offices.list.map(office => `<li><strong>${office.name}</strong> - ${office.address}</li>`).join('');
+  document.querySelector('.card:nth-child(4) p').textContent = t.offices.text;
+
+  // Update services
+  document.querySelector('.card:nth-child(5) h2').textContent = t.services.title;
+  document.querySelector('.card:nth-child(5) ul').innerHTML = t.services.items.map(item => `<li>${item}</li>`).join('');
+
+  // Update contact
+  document.querySelector('#contact h2').textContent = t.contact.title;
+  document.querySelectorAll('.contact-grid div')[0].querySelector('p').textContent = t.contact.manager;
+  document.querySelectorAll('.contact-grid div')[1].querySelector('p a').textContent = t.contact.email;
+  document.querySelectorAll('.contact-grid div')[2].querySelector('p a').textContent = t.contact.phone;
+  document.querySelector('#contact p').textContent = t.contact.text;
+  document.querySelector('#contact .btn').textContent = t.contact.cta;
+
+  // Update company details
+  document.querySelector('.card:nth-child(6) h2').textContent = t.company_details.title;
+  document.querySelector('.card:nth-child(6) ul').innerHTML = t.company_details.companies.map(company => `
+    <li><strong>${company.name}</strong><br>${company.address}<br>${company.tax_number}<br>${company.bank}</li>
+  `).join('');
+
+  // Update footer
+  document.querySelector('.footer-logo').textContent = t.footer.logo;
+  document.querySelector('.footer-section p').textContent = t.footer.description;
+  document.querySelector('.footer-section:nth-child(2) h3').textContent = t.footer.quick_links.title;
+  document.querySelectorAll('.footer-links li a').forEach((link, i) => {
+    link.textContent = t.footer.quick_links.links[i];
+  });
+  document.querySelector('.footer-section:nth-child(3) h3').textContent = t.footer.contact.title;
+document.querySelectorAll('.footer-section:nth-child(3) p')[0].textContent = t.footer.contact.Tukey.contact.address;
+  document.querySelectorAll('.footer-section:nth-child(3) p')[1].textContent = t.footer.contact.email;
+  document.querySelectorAll('.footer-section:nth-child(3) p')[2].textContent = t.footer.contact.phone;
+  document.querySelector('.copyright p').textContent = t.footer.copyright;
+}
+
+// Language switcher for flags
+const flagItems = document.querySelectorAll('.flag-list li img');
+flagItems.forEach(flag => {
+  flag.addEventListener('click', () => {
+    const lang = flag.getAttribute('data-lang');
+    
+    // Remove active class from all flags
+    flagItems.forEach(item => item.classList.remove('active'));
+    
+    // Add active class to clicked flag
+    flag.classList.add('active');
+    
+    // Update content
+    updateContent(lang);
+  });
+});
+
+// Initialize with default language (Hungarian)
+document.querySelector('.flag-list img[data-lang="hu"]').classList.add('active');
+updateContent('hu');
+
+
+//picture 
+
+
+  </script>
+</body>
+</html>
